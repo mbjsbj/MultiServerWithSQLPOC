@@ -1187,7 +1187,7 @@
     },
     "SqlServerURL": {
       "type": "string",
-      "value": "[reference(parameters('pocsql1dbName')).fullyQualifiedDomainName]"
+      "value": "[reference(variables('pocsql1Name')).fullyQualifiedDomainName]"
     }
   }
 }
