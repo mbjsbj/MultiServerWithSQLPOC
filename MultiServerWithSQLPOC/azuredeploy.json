@@ -273,7 +273,7 @@
       "type": "string"
     },
     "pocsql1AdminLogin": {
-      "defaultValue": "Azure123$%^",
+      "defaultValue": "Sqladmin",
       "type": "string",
       "minLength": 1
     },
