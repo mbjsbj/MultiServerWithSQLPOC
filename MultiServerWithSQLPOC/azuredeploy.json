@@ -1,8 +1,1194 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "parameters": {},
-  "variables": {},
-  "resources": [],
-  "outputs": {}
+  "parameters": {
+    "adminUsername": {
+      "type": "string",
+      "defaultValue": "azureadmin",
+      "metadata": {
+        "description": "Admin username"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "defaultValue": "Azure123$%^",
+      "metadata": {
+        "description": "Admin password"
+      }
+    },
+    "imagePublisherPOCWeb1": {
+      "type": "string",
+      "defaultValue": "MicrosoftWindowsServer",
+      "metadata": {
+        "description": "Image Publisher for VM POCWeb1"
+      }
+    },
+    "imagePublisherPOCWeb2": {
+      "type": "string",
+      "defaultValue": "MicrosoftWindowsServer",
+      "metadata": {
+        "description": "Image Publisher for VM POCWeb2"
+      }
+    },
+    "imagePublisherPOCApp1": {
+      "type": "string",
+      "defaultValue": "MicrosoftWindowsServer",
+      "metadata": {
+        "description": "Image Publisher for VM POCApp1"
+      }
+    },
+    "imagePublisherPOCApp2": {
+      "type": "string",
+      "defaultValue": "MicrosoftWindowsServer",
+      "metadata": {
+        "description": "Image Publisher for POCApp2"
+      }
+    },
+    "imageOfferPOCApp1": {
+      "type": "string",
+      "defaultValue": "WindowsServer",
+      "metadata": {
+        "description": "Image Offer for VM POCApp1"
+      }
+    },
+    "imageOfferPOCApp2": {
+      "type": "string",
+      "defaultValue": "WindowsServer",
+      "metadata": {
+        "description": "Image Offer for VM POCApp2"
+      }
+    },
+    "imageOfferPOCWeb1": {
+      "type": "string",
+      "defaultValue": "WindowsServer",
+      "metadata": {
+        "description": "Image Offer for VM POCWeb1"
+      }
+    },
+    "imageOfferPOCWeb2": {
+      "type": "string",
+      "defaultValue": "WindowsServer",
+      "metadata": {
+        "description": "Image Offer for VM POCWeb2"
+      }
+    },
+    "imageSKUPOCApp1": {
+      "type": "string",
+      "defaultValue": "2012-R2-Datacenter",
+      "metadata": {
+        "description": "Image SKU for VM POCApp1"
+      }
+    },
+    "imageSKUPOCApp2": {
+      "type": "string",
+      "defaultValue": "2012-R2-Datacenter",
+      "metadata": {
+        "description": "Image SKU for VM POCApp2"
+      }
+    },
+    "imageSKUPOCWeb1": {
+      "type": "string",
+      "defaultValue": "2012-R2-Datacenter",
+      "metadata": {
+        "description": "Image SKU for VM POCWeb1"
+      }
+    },
+    "imageSKUPOCWeb2": {
+      "type": "string",
+      "defaultValue": "2012-R2-Datacenter",
+      "metadata": {
+        "description": "Image SKU for VM POCWeb2"
+      }
+    },
+    "loadbalancerWebName": {
+      "type": "string",
+      "defaultValue": "POCWebLoadBalancer",
+      "metadata": {
+        "description": "Web Load Balancer name"
+      }
+    },
+    "loadbalancerAppName": {
+      "type": "string",
+      "defaultValue": "POCAppLoadBalancer",
+      "metadata": {
+        "description": "App Load Balancer name"
+      }
+    },
+    "nicNameWeb1": {
+      "type": "string",
+      "defaultValue": "POCWeb1-NIC",
+      "metadata": {
+        "description": "Network Interface name for POCWeb1"
+      }
+    },
+    "nicNameWeb2": {
+      "type": "string",
+      "defaultValue": "POCWeb2-NIC",
+      "metadata": {
+        "description": "Network Interface name for POCWeb2"
+      }
+    },
+    "nicNameApp1": {
+      "type": "string",
+      "defaultValue": "POCApp1-NIC",
+      "metadata": {
+        "description": "Network Interface name for POCApp1"
+      }
+    },
+    "nicNameApp2": {
+      "type": "string",
+      "defaultValue": "POCApp2-NIC",
+      "metadata": {
+        "description": "Network Interface name for POCApp2"
+      }
+    },
+    "publicIPAddressWebLBName": {
+      "type": "string",
+      "defaultValue": "POCLBPublicIP",
+      "metadata": {
+        "description": "Public IP Name"
+      }
+    },
+    "publicIPAddressWeb1VMName": {
+      "type": "string",
+      "defaultValue": "POCWeb1PublicIP",
+      "metadata": {
+        "description": "Public IP Name for VM POCWeb1"
+      }
+    },
+    "publicIPAddressWeb2VMName": {
+      "type": "string",
+      "defaultValue": "POCWeb2PublicIP",
+      "metadata": {
+        "description": "Public IP Name for VM POCWeb2"
+      }
+    },
+    "publicIPAddressApp1VMName": {
+      "type": "string",
+      "defaultValue": "POCApp1PublicIP",
+      "metadata": {
+        "description": "Public IP Name for VM POCApp1"
+      }
+    },
+    "publicIPAddressApp2VMName": {
+      "type": "string",
+      "defaultValue": "POCApp2PublicIP",
+      "metadata": {
+        "description": "Public IP Name for VM POCApp2"
+      }
+    },
+    "vnetName": {
+      "type": "string",
+      "defaultValue": "POCVNET",
+      "metadata": {
+        "description": "VNET name"
+      }
+    },
+    "vmNameWeb1": {
+      "type": "string",
+      "defaultValue": "POCWeb1",
+      "metadata": {
+        "description": "Name of Web Server 1"
+      }
+    },
+    "vmNameWeb2": {
+      "type": "string",
+      "defaultValue": "POCWeb2",
+      "metadata": {
+        "description": "Name of Web Server 2"
+      }
+    },
+    "vmNameApp1": {
+      "type": "string",
+      "defaultValue": "POCApp1",
+      "metadata": {
+        "description": "Name of App Server 1"
+      }
+    },
+    "vmNameApp2": {
+      "type": "string",
+      "defaultValue": "POCApp2",
+      "metadata": {
+        "description": "Name of App Server 2"
+      }
+    },
+    "vmSizeWeb1": {
+      "type": "string",
+      "defaultValue": "Standard_D2s_v3",
+      "metadata": {
+        "description": "Size of the VM POCWeb1"
+      }
+    },
+    "vmSizeWeb2": {
+      "type": "string",
+      "defaultValue": "Standard_D2s_v3",
+      "metadata": {
+        "description": "Size of the VM POCWeb2"
+      }
+    },
+    "vmSizeApp1": {
+      "type": "string",
+      "defaultValue": "Standard_D2s_v3",
+      "metadata": {
+        "description": "Size of the VM POCApp1"
+      }
+    },
+    "vmSizeApp2": {
+      "type": "string",
+      "defaultValue": "Standard_D2s_v3",
+      "metadata": {
+        "description": "Size of the VM POCApp2"
+      }
+    },
+    "subnets_WebSubnet_name": {
+      "defaultValue": "POCWebSubnet",
+      "type": "string"
+    },
+    "subnets_AppSubnet_name": {
+      "defaultValue": "POCAppSubnet",
+      "type": "string"
+    },
+    "networkSecurityGroup_POCWebNSG_name": {
+      "defaultValue": "POCWebNSG",
+      "type": "string"
+    },
+    "networkSecurityGroup_POCAppNSG_name": {
+      "defaultValue": "POCAppNSG",
+      "type": "string"
+    },
+    "networkSecurityGroup_POCWebNSG_destinationPortRange": {
+      "defaultValue": "*",
+      "type": "string"
+    },
+    "securityRules_Allow_HTTP_And_HTTPS_destinationPortRange": {
+      "defaultValue": "*",
+      "type": "string"
+    },
+    "securityRules_RDP_In_name": {
+      "defaultValue": "AllowRDPIn",
+      "type": "string"
+    },
+    "securityRules_Allow_HTTP_And_HTTPS_name": {
+      "defaultValue": "Allow_HTTP_And_HTTPS",
+      "type": "string"
+    },
+    "pocsql1AdminLogin": {
+      "defaultValue": "Azure123$%^",
+      "type": "string",
+      "minLength": 1
+    },
+    "pocsql1AdminLoginPassword": {
+      "defaultValue": "Su93rS3cr3t!",
+      "type": "securestring"
+    },
+    "pocsql1dbName": {
+      "defaultValue": "pocsql1db",
+      "type": "string",
+      "minLength": 1
+    },
+    "pocsql1dbCollation": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "SQL_Latin1_General_CP1_CI_AS"
+    },
+    "pocsql1dbEdition": {
+      "type": "string",
+      "defaultValue": "Basic",
+      "allowedValues": [
+        "Basic",
+        "Standard",
+        "Premium"
+      ]
+    },
+    "pocsql1dbRequestedServiceObjectiveName": {
+      "type": "string",
+      "defaultValue": "Basic",
+      "allowedValues": [
+        "Basic",
+        "S0",
+        "S1",
+        "S2",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "metadata": {
+        "description": "Describes the performance level for Edition"
+      }
+    }
+  },
+  "variables": {
+    "availabilitySetWebName": "POCWebAvailabilitySet",
+    "availabilitySetAppName": "POCAppAvailabilitySet",
+    "addressPrefix": "10.249.0.0/16",
+    "subnetWebName": "POCWebSubnet",
+    "subnetAppName": "POCAppSubnet",
+    "subnetPrefix": "10.249.0.0/24",
+    "vnetenableDDosProtection": "false",
+    "vnetenableVmProtection": "false",
+    "nsgRDPSourceInRange": "75.60.3.15/32",
+    "nsgHTTPAndHTTPSSourceInRange": "*",
+    "publicIPAddressLoadbalancerType": "Static",
+    "publicIPAddressWebVM1Type": "Static",
+    "publicIPAddressWebVM2Type": "Static",
+    "publicIPAddressAppVM1Type": "Static",
+    "publicIPAddressAppVM2Type": "Static",
+    "publicIPAddressWebLBID": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressWebLBName'))]",
+    "privateIPAddressWeb1VM": "10.249.0.8",
+    "privateIPAddressWeb2VM": "10.249.0.9",
+    "privateIPAddressApp1VM": "10.249.1.8",
+    "privateIPAddressApp2VM": "10.249.1.9",
+    "numberOfInstances": 2,
+    "lbWebID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadbalancerWebName'))]",
+    "lbAppID": "[resourceId('Microsoft.Network/loadBalancers',parameters('loadbalancerAppName'))]",
+    "frontEndIPConfigWebID": "[concat(variables('lbWebID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
+    "frontEndIPConfigAppID": "[concat(variables('lbAppID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
+    "lbPoolWebID": "[concat(variables('lbWebID'),'/backendAddressPools/BackendPool1')]",
+    "lbPoolAppID": "[concat(variables('lbAppID'),'/backendAddressPools/BackendPool1')]",
+    "lbProbeWebID": "[concat(variables('lbWebID'),'/probes/tcpProbe')]",
+    "lbProbeAppID": "[concat(variables('lbAppID'),'/probes/tcpProbe')]",
+    "lbAppRuleName": "LoadBalancerAppRuleTCP8080",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
+    "subnetWebRef": "[concat(variables('vnetID'), '/subnets/', variables('subnetWebName'))]",
+    "subnetAppRef": "[concat(variables('vnetID'), '/subnets/', variables('subnetAppName'))]",
+    "pocsql1Name": "[concat('pocsql1', uniqueString(resourceGroup().id))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Compute/availabilitySets",
+      "name": "[variables('availabilitySetWebName')]",
+      "apiVersion": "2016-04-30-preview",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "platformFaultDomainCount": 2,
+        "platformUpdateDomainCount": 5,
+        "managed": true
+      }
+    },
+    {
+      "type": "Microsoft.Compute/availabilitySets",
+      "name": "[variables('availabilitySetAppName')]",
+      "apiVersion": "2016-04-30-preview",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "platformFaultDomainCount": 2,
+        "platformUpdateDomainCount": 5,
+        "managed": true
+      }
+    },
+    {
+      "apiVersion": "2018-02-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "name": "[parameters('publicIPAddressWebLBName')]",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "publicIPAllocationMethod": "[variables('publicIPAddressLoadbalancerType')]",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    },
+    {
+      "apiVersion": "2018-02-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "name": "[parameters('publicIPAddressApp1VMName')]",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "publicIPAllocationMethod": "[variables('publicIPAddressAppVM1Type')]",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    },
+    {
+      "apiVersion": "2018-02-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "name": "[parameters('publicIPAddressApp2VMName')]",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "publicIPAllocationMethod": "[variables('publicIPAddressAppVM2Type')]",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    },
+    {
+      "apiVersion": "2018-02-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "name": "[parameters('publicIPAddressWeb1VMName')]",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "publicIPAllocationMethod": "[variables('publicIPAddressWebVM1Type')]",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    },
+    {
+      "apiVersion": "2018-02-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "name": "[parameters('publicIPAddressWeb2VMName')]",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "publicIPAllocationMethod": "[variables('publicIPAddressWebVM2Type')]",
+        "publicIPAddressVersion": "IPv4",
+        "idleTimeoutInMinutes": 4
+      }
+    },
+    {
+      "apiVersion": "2018-02-01",
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "[parameters('vnetName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('addressPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('subnetWebName')]",
+            "properties": {
+              "addressPrefix": "[variables('subnetPrefix')]"
+            }
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": "[variables('vnetenableDDosProtection')]",
+        "enableVmProtection": "[variables('vnetenableVmProtection')]"
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('vnetName'), '/', parameters('subnets_WebSubnet_name'))]",
+      "apiVersion": "2018-02-01",
+      "scale": null,
+      "properties": {
+        "provisioningState": "Succeeded",
+        "addressPrefix": "10.249.0.0/24"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('vnetName'), '/', parameters('subnets_AppSubnet_name'))]",
+      "apiVersion": "2018-02-01",
+      "scale": null,
+      "properties": {
+        "provisioningState": "Succeeded",
+        "addressPrefix": "10.249.1.0/24"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+      ]
+    },
+    {
+      "apiVersion": "2018-04-01",
+      "name": "[parameters('loadbalancerAppName')]",
+      "type": "Microsoft.Network/loadBalancers",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "dependsOn": [
+        "[parameters('vnetName')]"
+      ],
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "LoadBalancerFrontEnd",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "10.249.1.10",
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnets_AppSubnet_name'))]"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "BackendPool1"
+          }
+        ],
+        "loadBalancingRules": [
+          {
+            "name": "[variables('lbAppRuleName')]",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[variables('frontEndIPConfigAppID')]"
+              },
+              "backendAddressPool": {
+                "id": "[variables('lbPoolAppID')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 8080,
+              "backendPort": 8080,
+              "enableFloatingIP": false,
+              "loadDistribution": "SourceIP",
+              "disableOutboundSnat": false,
+              "idleTimeoutInMinutes": 5,
+              "probe": {
+                "id": "[variables('lbProbeAppID')]"
+              }
+            }
+          }
+        ],
+        "probes": [
+          {
+            "name": "tcpProbe",
+            "properties": {
+              "protocol": "Tcp",
+              "port": 8080,
+              "intervalInSeconds": 5,
+              "numberOfProbes": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2018-04-01",
+      "name": "[parameters('loadbalancerWebName')]",
+      "type": "Microsoft.Network/loadBalancers",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', parameters('publicIPAddressWebLBName'))]",
+        "[parameters('vnetName')]"
+      ],
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "LoadBalancerFrontEnd",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[variables('publicIPAddressWebLBID')]"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "BackendPool1"
+          }
+        ],
+        "loadBalancingRules": [
+          {
+            "name": "LoadBalancerWebRuleTCP80",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[variables('frontEndIPConfigWebID')]"
+              },
+              "backendAddressPool": {
+                "id": "[variables('lbPoolWebID')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 80,
+              "backendPort": 80,
+              "enableFloatingIP": false,
+              "loadDistribution": "SourceIP",
+              "disableOutboundSnat": false,
+              "idleTimeoutInMinutes": 5,
+              "probe": {
+                "id": "[variables('lbProbeWebID')]"
+              }
+            }
+          },
+          {
+            "name": "LoadBalancerWebRuleTCP443",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[variables('frontEndIPConfigWebID')]"
+              },
+              "backendAddressPool": {
+                "id": "[variables('lbPoolWebID')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 443,
+              "backendPort": 443,
+              "enableFloatingIP": false,
+              "loadDistribution": "SourceIP",
+              "disableOutboundSnat": false,
+              "idleTimeoutInMinutes": 5,
+              "probe": {
+                "id": "[variables('lbProbeWebID')]"
+              }
+            }
+          }
+        ],
+        "probes": [
+          {
+            "name": "tcpProbe",
+            "properties": {
+              "protocol": "Tcp",
+              "port": 80,
+              "intervalInSeconds": 5,
+              "numberOfProbes": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2017-12-01",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[parameters('vmNameWeb1')]",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNameWeb1'))]",
+        "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetWebName'))]"
+      ],
+      "properties": {
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetWebName'))]"
+        },
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmSizeWeb1')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('vmNameWeb1')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]",
+          "windowsConfiguration": {
+            "provisionVMAgent": true,
+            "enableAutomaticUpdates": true
+          },
+          "secrets": []
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[parameters('imagePublisherPOCWeb1')]",
+            "offer": "[parameters('imageOfferPOCWeb1')]",
+            "sku": "[parameters('imageSKUPOCWeb1')]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "[concat(parameters('vmNameWeb1'),'_OsDisk')]",
+            "createOption": "FromImage"
+          },
+          "dataDisks": []
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('nicNameWeb1'))]",
+              "properties": {
+                "primary": true
+              }
+            }
+          ]
+        },
+        "licenseType": "Windows_Server"
+      }
+    },
+    {
+      "apiVersion": "2017-12-01",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[parameters('vmNameWeb2')]",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNameWeb2'))]",
+        "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetWebName'))]"
+      ],
+      "properties": {
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetWebName'))]"
+        },
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmSizeWeb2')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('vmNameWeb2')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]",
+          "windowsConfiguration": {
+            "provisionVMAgent": true,
+            "enableAutomaticUpdates": true
+          },
+          "secrets": []
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[parameters('imagePublisherPOCWeb2')]",
+            "offer": "[parameters('imageOfferPOCWeb2')]",
+            "sku": "[parameters('imageSKUPOCWeb2')]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "[concat(parameters('vmNameWeb2'),'_OsDisk')]",
+            "createOption": "FromImage"
+          },
+          "dataDisks": []
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('nicNameWeb2'))]",
+              "properties": {
+                "primary": true
+              }
+            }
+          ]
+        },
+        "licenseType": "Windows_Server"
+      }
+    },
+    {
+      "apiVersion": "2017-12-01",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[parameters('vmNameApp1')]",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNameApp1'))]",
+        "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetAppName'))]"
+      ],
+      "properties": {
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetAppName'))]"
+        },
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmSizeApp1')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('vmNameApp1')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]",
+          "windowsConfiguration": {
+            "provisionVMAgent": true,
+            "enableAutomaticUpdates": true
+          },
+          "secrets": []
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[parameters('imagePublisherPOCApp1')]",
+            "offer": "[parameters('imageOfferPOCApp1')]",
+            "sku": "[parameters('imageSKUPOCApp1')]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "[concat(parameters('vmNameApp1'),'_OsDisk')]",
+            "createOption": "FromImage"
+          },
+          "dataDisks": []
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('nicNameApp1'))]",
+              "properties": {
+                "primary": true
+              }
+            }
+          ]
+        },
+        "licenseType": "Windows_Server"
+      }
+    },
+    {
+      "apiVersion": "2017-12-01",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[parameters('vmNameApp2')]",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicNameApp2'))]",
+        "[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetAppName'))]"
+      ],
+      "properties": {
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetAppName'))]"
+        },
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmSizeApp2')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('vmNameApp2')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]",
+          "windowsConfiguration": {
+            "provisionVMAgent": true,
+            "enableAutomaticUpdates": true
+          },
+          "secrets": []
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[parameters('imagePublisherPOCApp2')]",
+            "offer": "[parameters('imageOfferPOCApp2')]",
+            "sku": "[parameters('imageSKUPOCApp2')]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "[concat(parameters('vmNameApp2'),'_OsDisk')]",
+            "createOption": "FromImage"
+          },
+          "dataDisks": []
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('nicNameApp2'))]",
+              "properties": {
+                "primary": true
+              }
+            }
+          ]
+        },
+        "licenseType": "Windows_Server"
+      }
+    },
+    {
+      "name": "[parameters('nicNameWeb1')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2018-02-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
+        "[concat('Microsoft.Network/loadBalancers/', parameters('loadbalancerWebName'))]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroup_POCWebNSG_name'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[variables('privateIPAddressWeb1VM')]",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressWeb1VMName'))]"
+              },
+              "subnet": {
+                "id": "[variables('subnetWebRef')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[concat(variables('lbWebID'), '/backendAddressPools/BackendPool1')]"
+                }
+              ]
+            }
+          }
+        ],
+        "enableAcceleratedNetworking": false,
+        "enableIPForwarding": false,
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroup_POCWebNSG_name'))]"
+        }
+      }
+    },
+
+    {
+      "name": "[parameters('nicNameWeb2')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2018-02-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
+        "[concat('Microsoft.Network/loadBalancers/', parameters('loadbalancerWebName'))]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroup_POCWebNSG_name'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[variables('privateIPAddressWeb2VM')]",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressWeb2VMName'))]"
+              },
+              "subnet": {
+                "id": "[variables('subnetWebRef')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[concat(variables('lbWebID'), '/backendAddressPools/BackendPool1')]"
+                }
+              ]
+            }
+          }
+        ],
+        "enableAcceleratedNetworking": false,
+        "enableIPForwarding": false,
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroup_POCWebNSG_name'))]"
+        }
+      }
+    },
+    {
+      "name": "[parameters('nicNameApp1')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2018-02-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
+        "[concat('Microsoft.Network/loadBalancers/', parameters('loadbalancerAppName'))]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroup_POCAppNSG_name'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[variables('privateIPAddressApp1VM')]",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressApp1VMName'))]"
+              },
+              "subnet": {
+                "id": "[variables('subnetAppRef')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[concat(variables('lbAppID'), '/backendAddressPools/BackendPool1')]"
+                }
+              ]
+            }
+          }
+        ],
+        "enableAcceleratedNetworking": false,
+        "enableIPForwarding": false,
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroup_POCAppNSG_name'))]"
+        }
+      }
+    },
+    {
+      "name": "[parameters('nicNameApp2')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2018-02-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
+        "[concat('Microsoft.Network/loadBalancers/', parameters('loadbalancerAppName'))]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroup_POCAppNSG_name'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[variables('privateIPAddressApp2VM')]",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressApp2VMName'))]"
+              },
+              "subnet": {
+                "id": "[variables('subnetAppRef')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[concat(variables('lbAppID'), '/backendAddressPools/BackendPool1')]"
+                }
+              ]
+            }
+          }
+        ],
+        "enableAcceleratedNetworking": false,
+        "enableIPForwarding": false,
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroup_POCAppNSG_name'))]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "name": "[parameters('networkSecurityGroup_POCWebNSG_name')]",
+      "apiVersion": "2018-02-01",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "securityRules": [
+          {
+            "name": "AlloRDP_In",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "[variables('nsgRDPSourceInRange')]",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "Allow_HTTP_And_HTTPS",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "[variables('nsgHTTPAndHTTPSSourceInRange')]",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 110,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [
+                "80",
+                "443"
+              ],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "name": "[parameters('networkSecurityGroup_POCAppNSG_name')]",
+      "apiVersion": "2018-02-01",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "securityRules": [
+          {
+            "name": "AllowRDP_In",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "[variables('nsgRDPSourceInRange')]",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "Allow_TCP8080",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "sourceAddressPrefixes": [
+                "10.249.0.8/32",
+                "10.249.0.9/32"
+              ],
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 110,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRange": "8080",
+              "destinationAddressPrefixes": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[variables('pocsql1Name')]",
+      "type": "Microsoft.Sql/servers",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2014-04-01-preview",
+      "dependsOn": [],
+      "tags": {
+        "displayName": "pocsql1"
+      },
+      "properties": {
+        "administratorLogin": "[parameters('pocsql1AdminLogin')]",
+        "administratorLoginPassword": "[parameters('pocsql1AdminLoginPassword')]"
+      },
+      "resources": [
+        {
+          "name": "AllowAllWindowsAzureIps",
+          "type": "firewallrules",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2014-04-01-preview",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('pocsql1Name'))]"
+          ],
+          "properties": {
+            "startIpAddress": "10.249.1.8",
+            "endIpAddress": "10.249.1.9"
+          }
+        },
+        {
+          "name": "[parameters('pocsql1dbName')]",
+          "type": "databases",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2014-04-01-preview",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('pocsql1Name'))]"
+          ],
+          "properties": {
+            "collation": "[parameters('pocsql1dbCollation')]",
+            "edition": "[parameters('pocsql1dbEdition')]",
+            "maxSizeBytes": "1073741824",
+            "requestedServiceObjectiveName": "[parameters('pocsql1dbRequestedServiceObjectiveName')]"
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    "WebLoadBalancerPublicIPAddress": {
+      "value": "[reference(parameters('publicIPAddressWebLBName')).ipAddress]",
+      "type": "string"
+    },
+    "POCWeb1PublicIPAddress": {
+      "value": "[reference(parameters('publicIPAddressWeb1VMName')).ipAddress]",
+      "type": "string"
+    },
+    "POCWeb2PublicIPAddress": {
+      "value": "[reference(parameters('publicIPAddressWeb2VMName')).ipAddress]",
+      "type": "string"
+    },
+    "POCApp1PublicIPAddress": {
+      "value": "[reference(parameters('publicIPAddressApp1VMName')).ipAddress]",
+      "type": "string"
+    },
+    "POCApp2PublicIPAddress": {
+      "value": "[reference(parameters('publicIPAddressApp2VMName')).ipAddress]",
+      "type": "string"
+    },
+    "SqlServerURL": {
+      "type": "string",
+      "value": "[reference(parameters('pocsql1dbName')).fullyQualifiedDomainName]"
+    }
+  }
 }
+
