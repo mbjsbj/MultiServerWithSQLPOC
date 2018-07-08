@@ -326,7 +326,7 @@
     "subnetPrefix": "10.249.0.0/24",
     "vnetenableDDosProtection": "false",
     "vnetenableVmProtection": "false",
-    "nsgRDPSourceInRange": "75.60.3.15/32",
+    "nsgRDPSourceInRange": "1.2.3.4/32",
     "nsgHTTPAndHTTPSSourceInRange": "*",
     "publicIPAddressLoadbalancerType": "Static",
     "publicIPAddressWebVM1Type": "Static",
